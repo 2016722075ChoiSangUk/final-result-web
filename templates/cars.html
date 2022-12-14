@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<table class="table">
+<thead>
+  <tr>
+    <th>아파트</th>
+    <th>차량번호</th>
+    <th>입주민</th>
+    <th>연락처</th>
+    <th>승인</th>
+    <th>등록일시</th>
+  </tr>
+</thead>
+<tbody>
+{% for car in cars %}
+  <tr>
+    <td>{{ car['aname'] }}</td>
+    <td>{{ car['plate'] }}</td>
+    <td>{{ car['name'] }}</td>
+
+  {% for user in users %}
+    {% if user['id']==car['uid'] %}
+    <td>{{ user['phone'] }}</td>
+    {% endif %}
+  {% endfor %}
+    <td>
+      {% if car['permit'] == 'Y' %}
+        <a class="text-dark"><h5>승인됨</h5></a>
+        <a href="/car/{{car['plate']}}/revert">(수정)</a>
+      {% endif %}
+      {% if car['permit'] == 'N' %} <a class="text-info"><h4>대기 중</h4></a>
+
+      <button type="button" class="btn-primary" onclick="work_confirm('car/{{car['plate']}}/permit')">승인</button>
+      <a>/</a>
+      <button type="button" class="btn-secondary" onclick="work_deny('car/{{car['plate']}}/deny')">취소</button>
+      
+      {% endif %}
+    </td>
+    <td>{{ car['updated'] }}</td>
+  </tr>
+{% endfor %}
+</tbody>
+
+
+<button class="bttn-unite bttn-md bttn-success" onclick=location.href='/car/registry'>차량 등록 +</button>
+
+
+</div>
+{% endblock %}

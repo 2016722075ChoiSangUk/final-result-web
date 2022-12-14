@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<script type="text/javascript">
+  var myModal = document.getElementById('myModal')
+var myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', function () {
+  myInput.focus()
+})
+</script>
+<table class="table">
+<thead>
+  <tr>
+    <th>입주민</th>
+    <th>아파트</th>
+    <th>동호수</th>
+    <th>연락처</th>
+    <th>등록차량</th>
+    <th>승인</th>
+    <th>등록일시</th>
+  </tr>
+</thead>
+<tbody>
+
+
+{% for user in users %}
+  <tr>
+    <td><a href="/user/{{user['id']}}">{{ user['name'] }}</a>
+
+  
+        <div class="modal fade" id="permitbtn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">주의!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h2>주의! 입주민 정보를 승인합니다</h2>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary">확인</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+              </div>
+            </div>
+          </div>
+        </div>
+  </td>
+    <td>{{ user['apartment'] }}</td>
+    <td>{{ user['address'] }}</td>
+    <td>{{ user['phone'] }}</td>
+    <td>{{ user['count_car'] }}<a href="/cars">(확인)</a></td>
+    <td> 
+      {% if user['permit'] == 'Y' %}
+        <a class="text-dark"><h5>승인됨</h5></a>
+        <a href="/user/{{user['id']}}/revert">(수정)
+      {% endif %}
+      {% if user['permit'] == 'N' %}
+      <a class="text-info"><h4>대기 중</h4></a>
+      <button type="button" class="btn-primary" onclick="work_confirm('user/{{user['id']}}/permit')">승인</button>
+      <a>/</a>
+      <button type="button" class="btn-secondary" onclick="work_deny('user/{{user['id']}}/deny')">취소</button>
+      {% endif %}
+    </td>
+    <td>{{ user['updated'] }}</td>
+  </tr>
+{% endfor %}
+
+</tbody>
+<button class="bttn-unite bttn-md bttn-success" onclick=location.href='/user_car/registry'>입주민 등록 +</button>
+
+</div>
+{% endblock %}

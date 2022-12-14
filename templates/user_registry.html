@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col align-self-center">
+    <form action="/user/registry.do" method="POST">
+
+      <div class="card">
+        <div class="card-header d-flex align-items-center">
+          <h4>입주민 등록 요청</h4>
+        </div>
+        <div class="card-body"> 
+          <div class="form-group">
+            <label for="name">이름</label>
+            <input type="text" name="name"  class="form-control">
+          </div>
+
+
+          <div class="form-group">
+            <label for="phone">연락처</label>
+            <input type="text" name="phone"  class="form-control">
+          </div>
+       
+          <div class="form-group">
+            <label for="aid">아파트</label>
+              <select name="aid" class="form-control">
+                {% for apt in apartments %}
+                  <option value="{{apt['id']}}">{{apt['name']}}</option>
+                {% endfor %}
+              </select>
+          </div>
+
+          <div class="form-group">
+            <label for="address">주소</label>
+            <input type="text" name="address"  class="form-control">
+          </div>
+
+
+          <div class="form-group">
+            <input type="submit" name="registry" value="등록하기"  class="form-control mt-5">
+
+          </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>입주민 차량 관리 시스템</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/font-awesome/css/font-awesome.min.css') }}">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontastic.css') }}">
+    <!-- Google fonts - Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <!-- jQuery Circle-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/grasp_mobile_progress_circle-1.0.0.min.css') }}">
+    <!-- Custom Scrollbar-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css') }}">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.default.css') }}" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+   
+
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script language="javascript">
+$(document).ready(function(){
+ 
+    // 라디오버튼 클릭시 이벤트 발생
+    $("input:radio[name=radio]").click(function(){
+ 
+        if($("input[name=radio]:checked").val() == "1"){
+            $("input:text[name=plate]").attr("disabled",false);
+            // radio 버튼의 value 값이 1이라면 활성화
+ 
+        }else if($("input[name=radio]:checked").val() == "0"){
+              $("input:text[name=plate]").attr("disabled",true);
+            // radio 버튼의 value 값이 0이라면 비활성화
+        }
+    });
+});
+
+  </script>
+  <script>
+    function work_confirm(link){
+
+       if (confirm("정말 등록 하시겠습니까?") == true)
+          { 
+            location=link;
+         console.log("등록 완료되었습니다.");
+          }
+          else{
+        // false는 취소버튼을 눌렀을 때, 취소됨
+          }
+    }
+  </script>
+  <script>
+    function work_deny(link){
+
+       if (confirm("정말 취소 하시겠습니까?") == true)
+          { 
+            location=link;
+         console.log("완료되었습니다.");
+          }
+          else{
+        // false는 취소버튼을 눌렀을 때, 취소됨
+          console.log("취소되었습니다");
+          }
+    }
+  </script>
+  </head>
+  <body>
+    <!-- Side Navbar -->
+    <nav class="side-navbar">
+      <div class="side-navbar-wrapper">
+        <!-- Sidebar Header    -->
+        <div class="sidenav-header align-items-center justify-content-center">
+          <!-- User Info-->
+            <div class="d-block">
+              <h2 class="h5">주차관리시스템</h2>
+
+            </div>
+
+{% if session['username'] %}
+            <div class="d-block mt-2">
+
+              <h2><a href="/users"><td>{{session['username']}}</td></a></h5>
+
+              <h5><a href="/logout">로그아웃</a></h5>
+
+            </div>
+{% endif %}
+
+          
+        </div>
+
+        <!-- Sidebar Navigation Menus-->
+        <div class="main-menu">
+          <ul id="side-main-menu" class="side-menu list-unstyled">
+            <li><a href="/">Home</a></li>
+          </ul>
+          <h3 class="sidenav-heading">입주민 메뉴</h3>
+          <ul id="side-main-menu" class="side-menu list-unstyled">
+
+            <li><a href="/selectone">입주민 및 차량 등록 요청</a></li>
+            <li><a href="/car/registry">기존 입주민 차량 등록 요청</a></li>
+            <li><a href="/guard/registry">경비원 추가</a></li>
+          </ul>
+        </div>
+{% if session['username'] %}
+        <div class="admin-menu">
+          <h5 class="sidenav-heading">관리 메뉴</h5>
+          <ul id="side-admin-menu" class="side-menu list-unstyled">
+            <li><a href="/users">입주민 관리</a></li>
+            <li><a href="/cars">차량 관리</a></li>
+            <li><a href="/guards">경비원 관리</a></li>
+          </ul>
+        </div>
+{% endif %}
+      </div>
+    </nav>
+    <div class="page">
+      <!-- Counts Section -->
+      <section class="section-padding">
+        <div class="container">
+          <div class="row">
+            <!-- Count item widget-->
+            <div class="col">
+{% block content %}{% endblock %}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- JavaScript files-->
+    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/jquery.cookie/jquery.cookie.js') }}"> </script>
+    <script src="{{ url_for('static', filename='vendor/chart.js/Chart.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/jquery-validation/jquery.validate.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+    <!-- <script src="js/charts-home.js"></script> -->
+    <!-- Main File-->
+    <script src="{{ url_for('static', filename='js/front.js') }}"></script>
+  </body>
+</html>

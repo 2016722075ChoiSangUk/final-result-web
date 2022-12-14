@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col align-self-center">
+
+      <div class="card align-items-center"style="width: 900px;">
+        <div class="card-header d-flex align-items-center" >
+        <h4>입주민 등록 및 차량 등록 요청</h4><h5>&nbsp; &nbsp; &nbsp; &nbsp; 차량을 보유하고 계십니까?</h5>
+        </div>
+        <div class="card-body">
+          <button class="w-btn w-btn-indigo" type="button" onclick=location.href='/user_car/registry'>예</button>
+          <button class="w-btn w-btn-indigo" type="button" onclick=location.href='/user/registry'>아니요</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

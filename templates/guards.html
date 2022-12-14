@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<table class="table">
+<thead>
+  <tr>
+    <th>아파트</th>
+    <th>ID</th>
+    <th>이름</th>
+    <th>연락처</th>
+  </tr>
+</thead>
+<tbody>
+{% for guard in guards %}
+  <tr>
+    <td>{{ guard['apartment'] }}</td>
+    <td><a href="/guard/{{guard['id']}}">{{ guard['id'] }}</a></td>
+    <td>{{ guard['name'] }}</td>
+    <td>{{ guard['phone'] }}</td>
+  </tr>
+{% endfor %}
+</tbody>
+
+<button class="bttn-unite bttn-md bttn-success" onclick=location.href='/guard/registry'>경비원 등록 +</button>
+
+</div>
+{% endblock %}

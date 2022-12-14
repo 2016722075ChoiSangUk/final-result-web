@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+
+  <body>
+    <!-- Side Navbar -->
+    <nav class="side-navbar">
+      <div class="side-navbar-wrapper">
+        <!-- Sidebar Header    -->
+        <div class="sidenav-header align-items-center justify-content-center">
+          <!-- User Info-->
+          <!-- <div class="sidenav-header-inner text-center"><img src="img/avatar-7.jpg" alt="person" class="img-fluid rounded-circle"> -->
+            <div class="d-block">
+              <h2 class="h5">주차관리시스템</h2>
+            </div>
+{% if session['username'] %}
+            <div class="d-block mt-2">
+              <h5><a href="/logout">로그아웃</a></h5>
+            </div>
+{% endif %}
+          <!-- </div> -->
+        </div>
+        <!-- Sidebar Navigation Menues-->
+        <div class="main-menu">
+          <ul id="side-main-menu" class="side-menu list-unstyled">
+            <li><a href="/">Home</a></li>
+          </ul>
+          <h3 class="sidenav-heading">입주민 메뉴</h3>
+          <ul id="side-main-menu" class="side-menu list-unstyled">
+{% if session['username'] %}
+            <li><a href="/users">입주민 관리</a></li>
+            <li><a href="/cars">차량 관리</a></li>
+{% endif %}
+            <li><a href="/user/registry">입주민 등록 요청</a></li>
+            <li><a href="/car/registry">차량 등록 요청</a></li>
+          </ul>
+        </div>
+        <div class="admin-menu">
+          <h5 class="sidenav-heading">관리 메뉴</h5>
+          <ul id="side-admin-menu" class="side-menu list-unstyled"> 
+            <li><a href="/guards">경비원 관리</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="page">
+      <!-- Counts Section -->
+      <section class="dashboard-counts section-padding">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- Count item widget-->
+            <div class="col">
+{% block content %}{% endblock %}
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer class="main-footer">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-6">
+              <p>Your company &copy; 2017-2020</p>
+            </div>
+            <div class="col-sm-6 text-right">
+              <p>Design by <a href="https://bootstrapious.com/p/bootstrap-4-dashboard" class="external">Bootstrapious</a></p>
+              <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions and it helps me to run Bootstrapious. Thank you for understanding :)-->
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!-- JavaScript files-->
+    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="js/grasp_mobile_progress_circle-1.0.0.min.js"></script>
+    <script src="{{ url_for('static', filename='vendor/jquery.cookie/jquery.cookie.js"') }}> </script>
+    <script src="{{ url_for('static', filename='vendor/chart.js/Chart.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/jquery-validation/jquery.validate.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+    <script src="js/charts-home.js"></script>
+    <!-- Main File-->
+    <script src="js/front.js"></script>
+  </body>
+</html>

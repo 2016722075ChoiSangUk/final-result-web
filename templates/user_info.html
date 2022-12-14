@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="row">
+<div class="col align-self-center">
+<form action="/user/{{user['id']}}/update" method="POST">
+
+<div class="card">
+  <div class="card-header d-flex align-items-center">
+    <h4>입주민 등록 정보</h4>
+  </div>
+  <div class="card-body">
+
+<div class="form-group">
+  <label for="name">이름</label>
+  <input type="text" name="name" value="{{user['name']}}" class="form-control">
+</div>
+
+<div class="form-group">
+  <label for="aid">아파트</label>
+  <select name="aid" class="form-control">
+{% for apt in apartments %}
+  {% if apt['id'] == user['aid']%}
+  <option value="{{apt['id']}}" selected="selected">{{apt['name']}}</option>
+  {% else %}
+  <option value="{{apt['id']}}">{{apt['name']}}</option>
+  {% endif %}
+{% endfor %}
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="phone">연락처</label>
+  <input type="text" name="phone" value="{{user['phone']}}" class="form-control">
+</div>
+
+<div class="form-group">
+  <label for="address">주소</label>
+  <input type="text" name="address" value="{{user['address']}}" class="form-control">
+</div>
+
+<div class="form-group">
+  <label for="permit">승인여부</label>
+  <select name="permit" class="form-control">
+{% if user['permit']=='Y'%}
+  <option value="Y" selected="selected">Y</option>
+  <option value="N">N</option>
+{% else %}
+  <option value="Y">Y</option>
+  <option value="N" selected="selected">N</option> 
+{% endif %}
+</select>
+</div>
+
+<input type="submit" name="update" value="수정하기" class="form-control">
+
+</div>
+</div>
+</form>
+</div>
+</div>
+{% endblock %}
